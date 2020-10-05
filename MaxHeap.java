@@ -72,14 +72,14 @@ public class MaxHeap {
 		if(isLeaf(index)) return;
 		
 		int greaterChild = lChild(index);
-		if (lChild(index) < tail) {	// if left child exists
+		if (lChild(index) <= tail) {	// if left child exists
 			if (heap[lChild(index)].compareTo(heap[rChild(index)]) < 0) {
-				greaterChild = index*2+2;
+				greaterChild = rChild(index);
 			}
 		}
 		if (heap[index].compareTo(heap[greaterChild]) < 0) {
 			swap(index, greaterChild);
-			index = greaterChild;
+			//index = greaterChild;
 			siftDown(greaterChild);
 		}
 	}
