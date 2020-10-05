@@ -14,9 +14,6 @@ public class Process implements Comparable<Process> {
 		this.arrivalTime = arrivalTime;
 		this.timeNotProcessed =0;
 	}
-	public Process (int priority) {
-		this.priority = priority;
-	}
 	
 	public void reduceTimeRemaining () {
 		timeRemaining--;
