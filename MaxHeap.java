@@ -61,7 +61,7 @@ public class MaxHeap {
 	
 	// sift-up
 	public void siftUp (int index) {
-		while (heap[index].compareTo(heap[parent(index)]) > 0) {
+		while (index>0 && heap[index].compareTo(heap[parent(index)]) > 0) {
 			swap(index, parent(index));
 			index = parent(index);
 		}
