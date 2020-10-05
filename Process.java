@@ -39,7 +39,7 @@ public class Process implements Comparable<Process> {
 	@Override
 	public int compareTo(Process p) {
 		if(this.priority==p.getPriority())
-			return (arrivalTime<p.getArrivalTime()) ? 1 : -1 ;
+			return (arrivalTime>p.getArrivalTime()) ? 1 : -1 ;
 		return (priority>p.getPriority()) ? 1 : -1 ;
 	}
 }
