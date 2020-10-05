@@ -12,7 +12,7 @@ public class ProcessGenerator {
 	}
 	
 	public boolean query () {
-		return Math.random()<=probability;
+		return Math.random()<probability;
 	}
 	
 	public Process getNewProcess (int currentTime, int maxProcessTime, int maxLevel) {

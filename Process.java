@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Process implements Comparable<Process> {
 	
@@ -9,8 +10,9 @@ public class Process implements Comparable<Process> {
 	private boolean isFinished;
 	
 	public Process (int arrivalTime, int maxProcessTime, int maxLevel) {
-		this.priority  = (int) Math.ceil(maxLevel*Math.random());
-		this.timeRemaining = (int) Math.ceil(maxProcessTime*Math.random());
+		Random rand = new Random();
+		this.priority  = (int) Math.ceil(maxLevel*rand.nextDouble());
+		this.timeRemaining = (int) Math.ceil(maxProcessTime*rand.nextDouble());
 		this.arrivalTime = arrivalTime;
 		this.timeNotProcessed =0;
 	}
@@ -36,7 +38,7 @@ public class Process implements Comparable<Process> {
 
 	@Override
 	public int compareTo(Process p) {
-		if(priority==p.getPriority())
+		if(this.priority==p.getPriority())
 			return (arrivalTime<p.getArrivalTime()) ? 1 : -1 ;
 		return (priority>p.getPriority()) ? 1 : -1 ;
 	}
