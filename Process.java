@@ -11,8 +11,8 @@ public class Process implements Comparable<Process> {
 	
 	public Process (int arrivalTime, int maxProcessTime, int maxLevel) {
 		Random rand = new Random();
-		this.priority  = (int) Math.ceil(maxLevel*rand.nextDouble());
-		this.timeRemaining = (int) Math.ceil(maxProcessTime*rand.nextDouble());
+		this.priority  = (int) (maxLevel*rand.nextDouble());
+		this.timeRemaining = (int) (maxProcessTime*rand.nextDouble());
 		this.arrivalTime = arrivalTime;
 		this.timeNotProcessed =0;
 	}
@@ -39,7 +39,7 @@ public class Process implements Comparable<Process> {
 	@Override
 	public int compareTo(Process p) {
 		if(this.priority==p.getPriority())
-			return (arrivalTime>p.getArrivalTime()) ? 1 : -1 ;
+			return (arrivalTime<p.getArrivalTime()) ? 1 : -1 ;
 		return (priority>p.getPriority()) ? 1 : -1 ;
 	}
 }
