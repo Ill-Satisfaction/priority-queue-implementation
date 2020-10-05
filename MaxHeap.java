@@ -34,6 +34,7 @@ public class MaxHeap {
 		if (isEmpty()) return null;
 		
 		Process retVal = heap[0];
+		retVal.resetTimeNotProcessed();
 		incrementNotProcessed();
 		if (tail>0) heap[0] = heap[tail];
 		heap[tail] = null;
@@ -52,6 +53,7 @@ public class MaxHeap {
 	public void update(int timeToIncrementLevel, int maxLevel) {
 		for (int i=0; i<=tail; i++) {
 			if (heap[i].getTimeNotProcessed()>=timeToIncrementLevel) {
+				heap[i].resetTimeNotProcessed();
 				heap[i].increasePriority(maxLevel);
 			}
 		}
