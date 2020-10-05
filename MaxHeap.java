@@ -13,7 +13,7 @@ public class MaxHeap {
 	
 	
 	public MaxHeap () {
-		heap = new Process[10];
+		heap = new Process[200];
 		tail = 0;
 	}
 	
