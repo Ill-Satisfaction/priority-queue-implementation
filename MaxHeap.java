@@ -2,6 +2,7 @@
  * @author akiahtullis
  * max heap implementation for holding processes
  */
+
 public class MaxHeap {
 	
 	private Process[] heap;
@@ -53,7 +54,7 @@ public class MaxHeap {
 		for (int i=0; i<tail; i++) {
 			if (heap[i].getTimeNotProcessed()>=timeToIncrementLevel) {
 				if(heap[i].getTimeNotProcessed()<=maxLevel) {
-					heap[i].incrementPriority();
+					heap[i].increasePriority();
 				}
 			}
 		}
@@ -72,18 +73,18 @@ public class MaxHeap {
 	
 	// sift-down
 	public void siftDown (int index) {
-		while (!isLeaf(index)) {
-			int leftChild = index*2+1;
-			int greaterChild = leftChild;
-			if (leftChild < tail) {	// if right child exists
-				if (heap[leftChild].compareTo(heap[leftChild+1]) < 0) {
-					greaterChild = index*2+2;
-				}
+		if(isLeaf(index)) return;
+		
+		int greaterChild = lChild(index);
+		if (lChild(index) < tail) {	// if left child exists
+			if (heap[lChild(index)].compareTo(heap[rChild(index)]) < 0) {
+				greaterChild = index*2+2;
 			}
-			if (heap[index].compareTo(heap[greaterChild]) < 0) {
-				swap(index, greaterChild);
-				index = greaterChild;
-			}
+		}
+		if (heap[index].compareTo(heap[greaterChild]) < 0) {
+			swap(index, greaterChild);
+			index = greaterChild;
+			siftDown(greaterChild);
 		}
 	}
 	
@@ -102,11 +103,13 @@ public class MaxHeap {
 	private boolean isLeaf (int index) {
 		return (index >= (tail+1)/2);
 	}
+	private int lChild (int idx) {return 2*idx+1;}
+	private int rChild (int idx) {return 2*idx+2;}
 	
 	// not Processed -> increments time of all nodes
 	private void incrementNotProcessed () {
 		for (int i=0; i<tail; i++) {
-			heap[i].incrementTimeNotProcessed();
+			heap[i].increaseTimeNotProcessed();
 		}
 	}
 	
