@@ -34,11 +34,11 @@ public class MaxHeap {
 		if (isEmpty()) return null;
 		
 		Process retVal = heap[0];
+		incrementNotProcessed();
 		if (tail>0) heap[0] = heap[tail];
 		heap[tail] = null;
 		tail--;
 		siftDown(0);
-		incrementNotProcessed();
 		return retVal;
 	}
 	
@@ -52,21 +52,16 @@ public class MaxHeap {
 	public void update(int timeToIncrementLevel, int maxLevel) {
 		for (int i=0; i<=tail; i++) {
 			if (heap[i].getTimeNotProcessed()>=timeToIncrementLevel) {
-				if(heap[i].getPriority()<=maxLevel) {
-					heap[i].increasePriority();
-				}
+				heap[i].increasePriority(maxLevel);
 			}
 		}
 	}
 	
 	// sift-up
 	public void siftUp (int index) {
-		int currIndex = index;
-		int parentIndex = (index%2==0) ? (index-1)/2 : index/2;
-		while (heap[currIndex].compareTo(heap[parentIndex]) > 0) {
-			swap(currIndex, parentIndex);
-			currIndex = parentIndex;
-			parentIndex = (currIndex%2==0) ? (currIndex-1)/2 : currIndex/2;
+		while (heap[index].compareTo(heap[parent(index)]) > 0) {
+			swap(index, parent(index));
+			index = parent(index);
 		}
 	}
 	
@@ -100,12 +95,13 @@ public class MaxHeap {
 	
 	// is leaf -> checks if given index is a leaf
 	private boolean isLeaf (int index) {return (index >= (tail+1)/2);}
+	private int parent (int idx) {return (idx-1)/2;}
 	private int lChild (int idx) {return 2*idx+1;}
 	private int rChild (int idx) {return 2*idx+2;}
 	
 	// not Processed -> increments time of all nodes
 	private void incrementNotProcessed () {
-		for (int i=0; i<=tail; i++) {
+		for (int i=1; i<=tail; i++) {
 			heap[i].increaseTimeNotProcessed();
 		}
 	}

@@ -22,7 +22,10 @@ public class Process implements Comparable<Process> {
 	
 	public boolean finish () {return isFinished;}
 	
-	public void increasePriority () {priority++;}
+	public void increasePriority (int maxLevel) {
+		if (this.priority<maxLevel)
+			priority++;
+	}
 	public void increaseTimeNotProcessed () {timeNotProcessed++;}
 	public void resetTimeNotProcessed () {this.timeNotProcessed =0;}
 	
