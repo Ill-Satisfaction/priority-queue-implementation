@@ -50,7 +50,7 @@ public class MaxHeap {
 	
 	// update -> increments processes that haven't been touched in a while, does not exceed maximum
 	public void update(int timeToIncrementLevel, int maxLevel) {
-		for (int i=0; i<tail; i++) {
+		for (int i=0; i<=tail; i++) {
 			if (heap[i].getTimeNotProcessed()>=timeToIncrementLevel) {
 				if(heap[i].getPriority()<=maxLevel) {
 					heap[i].increasePriority();
@@ -105,14 +105,14 @@ public class MaxHeap {
 	
 	// not Processed -> increments time of all nodes
 	private void incrementNotProcessed () {
-		for (int i=0; i<tail; i++) {
+		for (int i=0; i<=tail; i++) {
 			heap[i].increaseTimeNotProcessed();
 		}
 	}
 	
 	private void expandArray () {
 		Process[] tmp = new Process[tail*2];
-		for (int i=0; i<tail; i++) {
+		for (int i=0; i<=tail; i++) {
 			tmp[i] = heap[i];
 		}
 		heap = tmp;
