@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Process implements Comparable<Process> {
 	
 	private int priority;
@@ -9,11 +7,10 @@ public class Process implements Comparable<Process> {
 	
 	private boolean isFinished;
 	
-	public Process (int arrivalTime, int maxProcessTime, int maxLevel) {
-		Random rand = new Random();
-		this.priority  = (int) (maxLevel*rand.nextDouble());
-		this.timeRemaining = (int) (maxProcessTime*rand.nextDouble());
+	public Process (int arrivalTime, int processTime, int priority) {
 		this.arrivalTime = arrivalTime;
+		this.timeRemaining = processTime;
+		this.priority  = priority;
 		this.timeNotProcessed =0;
 	}
 	
